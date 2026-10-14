@@ -115,7 +115,7 @@ class CoordinatorePienone(DataUpdateCoordinator[dict]):
 
     async def _leggi(self, percorso: str, parametri: dict | None = None) -> dict:
         # un numero casuale per installazione (nessun dato personale): serve al server per i limiti contro gli abusi
-        intestazioni = {"User-Agent": "Pienone-HomeAssistant/0.2.2"}
+        intestazioni = {"User-Agent": "Pienone-HomeAssistant/0.2.3"}
         if self.archivio is not None and self.archivio.installazione:
             intestazioni["X-Pienone-Installazione"] = self.archivio.installazione
         async with asyncio.timeout(20):

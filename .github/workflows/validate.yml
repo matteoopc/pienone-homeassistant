@@ -20,9 +20,6 @@ jobs:
       - uses: hacs/action@main
         with:
           category: integration
-          # il logo è nel componente (custom_components/pienone/brand, Home Assistant 2026.2+): il repository
-          # home-assistant/brands non serve
-          ignore: brands
 
   regole:
     runs-on: ubuntu-latest
