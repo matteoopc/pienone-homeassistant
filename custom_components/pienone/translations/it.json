@@ -1,0 +1,270 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Pienone",
+        "description": "Prezzi dei carburanti e colonnine vicino a una zona (dati ufficiali MIMIT e PUN). Di partenza la posizione di casa e tutti i carburanti; i sensori principali seguono l'auto attiva dell'app, se la sincronizzi.",
+        "data": {
+          "self_service": "Self service",
+          "raggio_km": "Raggio",
+          "latitudine": "Latitudine",
+          "longitudine": "Longitudine",
+          "carburanti": "Carburanti"
+        }
+      }
+    },
+    "error": {
+      "fuori_italia": "La zona deve essere in Italia: i prezzi sono solo italiani.",
+      "nessun_carburante": "Scegli almeno un carburante."
+    },
+    "abort": {
+      "already_configured": "Questa zona c'è già."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opzioni di Pienone",
+        "description": "Preferiti: i numeri MIMIT dei distributori, separati da virgole (per esempio l'attributo id_mimit del sensore «Più conveniente»). Soglia: di quanti centesimi deve scendere un prezzo per l'evento pienone_prezzo_sceso.",
+        "data": {
+          "preferiti": "Altri preferiti (numeri MIMIT)",
+          "soglia_cent": "Soglia del calo",
+          "raggio_km": "Raggio",
+          "carburanti": "Carburanti",
+          "self_service": "Self service",
+          "mostra": "Dati dall'app da mostrare",
+          "preferiti_scelti": "Distributori preferiti (dai vicini)"
+        }
+      }
+    },
+    "error": {
+      "nessun_carburante": "Scegli almeno un carburante."
+    }
+  },
+  "selector": {
+    "carburante": {
+      "options": {
+        "benzina": "Benzina",
+        "gasolio": "Gasolio",
+        "gpl": "GPL",
+        "metano": "Metano",
+        "elettrico": "Elettrico (colonnine)"
+      }
+    },
+    "tipo_auto": {
+      "options": {
+        "benzina": "Benzina",
+        "gasolio": "Gasolio",
+        "gpl": "GPL",
+        "metano": "Metano",
+        "elettrica": "Elettrica",
+        "ibrida_plugin": "Ibrida plug-in"
+      }
+    },
+    "sezione": {
+      "options": {
+        "viaggio": "Viaggio in corso",
+        "carplay": "CarPlay",
+        "statistiche": "Statistiche del diario",
+        "obd": "Adattatore OBD",
+        "notifiche": "Notifiche dell'app",
+        "attivita": "Live Activity",
+        "preferenze": "Preferenze",
+        "posizione": "Zona del telefono",
+        "extra": "Altri dati dall'app"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "piu_conveniente": {
+        "name": "Più conveniente"
+      },
+      "mediana_zona": {
+        "name": "Prezzo tipico della zona"
+      },
+      "tendenza_7_giorni": {
+        "name": "Tendenza 7 giorni"
+      },
+      "consiglio": {
+        "name": "Consiglio"
+      },
+      "preferito": {
+        "name": "Preferito {id}"
+      },
+      "sincronizzazione": {
+        "name": "Sincronizzazione con l'app"
+      },
+      "auto_attiva": {
+        "name": "Auto attiva"
+      },
+      "ultimo_pieno": {
+        "name": "Ultimo pieno"
+      },
+      "colonnine_libere": {
+        "name": "Colonnine libere vicine"
+      },
+      "ricarica_piu_conveniente": {
+        "name": "Ricarica più conveniente"
+      },
+      "prossimo_viaggio": {
+        "name": "Prossimo viaggio"
+      },
+      "quadro": {
+        "name": "Quadro"
+      },
+      "auto_livello": {
+        "name": "Livello"
+      },
+      "auto_autonomia": {
+        "name": "Autonomia"
+      },
+      "auto_km": {
+        "name": "Chilometri"
+      },
+      "auto_carburante": {
+        "name": "Carburante"
+      },
+      "auto_piu_conveniente": {
+        "name": "Più conveniente"
+      },
+      "auto_ricarica": {
+        "name": "Ricarica più conveniente"
+      },
+      "auto_mediana_zona": {
+        "name": "Prezzo tipico della zona"
+      },
+      "auto_tendenza_7_giorni": {
+        "name": "Tendenza 7 giorni"
+      },
+      "auto_consiglio": {
+        "name": "Consiglio"
+      },
+      "auto_ultimo_pieno": {
+        "name": "Ultimo pieno"
+      },
+      "dati_app": {
+        "name": "Dati dall'app"
+      },
+      "in_viaggio": {
+        "name": "In viaggio"
+      },
+      "carplay": {
+        "name": "CarPlay"
+      },
+      "live_activity": {
+        "name": "Live Activity"
+      },
+      "notifiche_app": {
+        "name": "Notifiche dell'app"
+      },
+      "auto_consumo_medio": {
+        "name": "Consumo medio"
+      },
+      "auto_spesa_mese": {
+        "name": "Spesa del mese"
+      },
+      "auto_km_mese": {
+        "name": "Km del mese"
+      },
+      "auto_litri_mese": {
+        "name": "Litri del mese"
+      },
+      "auto_prezzo_medio": {
+        "name": "Prezzo medio del mese"
+      },
+      "auto_obd": {
+        "name": "Adattatore OBD"
+      }
+    }
+  },
+  "services": {
+    "aggiorna": {
+      "name": "Aggiorna i prezzi",
+      "description": "Rilegge subito prezzi e tendenza."
+    },
+    "registra_pieno": {
+      "name": "Registra un pieno",
+      "description": "Aggiunge un pieno al diario dell'app Pienone (da confermare nell'app). Un pieno della stessa auto entro 2 ore non si aggiunge due volte.",
+      "fields": {
+        "litri": {
+          "name": "Litri",
+          "description": "Litri messi."
+        },
+        "euro": {
+          "name": "Importo",
+          "description": "Totale pagato, in euro."
+        },
+        "prezzo": {
+          "name": "Prezzo",
+          "description": "Prezzo al litro: serve per l'importo se manca."
+        },
+        "km": {
+          "name": "Contachilometri",
+          "description": "I km del contachilometri."
+        },
+        "distributore": {
+          "name": "Distributore",
+          "description": "Nome o indirizzo del distributore."
+        },
+        "impianto": {
+          "name": "Numero MIMIT",
+          "description": "L'attributo id_mimit dei sensori di Pienone."
+        },
+        "auto": {
+          "name": "Auto",
+          "description": "Il nome dell'auto come nell'app; senza, l'auto attiva."
+        },
+        "quando": {
+          "name": "Quando",
+          "description": "Senza, adesso."
+        },
+        "pieno_completo": {
+          "name": "Pieno completo",
+          "description": "Serbatoio riempito fino in cima."
+        }
+      }
+    }
+  },
+  "config_subentries": {
+    "auto": {
+      "initiate_flow": {
+        "user": "Aggiungi auto"
+      },
+      "entry_type": "Auto",
+      "step": {
+        "user": {
+          "title": "Un'auto in Home Assistant",
+          "description": "Senza l'app Pienone: nome, tipo e, se ce le hai, le entità della tua auto (per esempio quelle dell'integrazione della marca). Con l'app sincronizzata, un'auto con lo stesso nome si unisce a quella dell'app.",
+          "data": {
+            "nome": "Nome",
+            "tipo": "Tipo",
+            "capienza": "Capienza del serbatoio",
+            "batteria_kwh": "Batteria",
+            "consumo": "Consumo (L/100 km o kWh/100 km)",
+            "entita_livello": "Entità del livello (% o litri)",
+            "entita_autonomia": "Entità dell'autonomia",
+            "entita_km": "Entità dei km"
+          }
+        },
+        "reconfigure": {
+          "title": "Un'auto in Home Assistant",
+          "description": "Senza l'app Pienone: nome, tipo e, se ce le hai, le entità della tua auto (per esempio quelle dell'integrazione della marca). Con l'app sincronizzata, un'auto con lo stesso nome si unisce a quella dell'app.",
+          "data": {
+            "nome": "Nome",
+            "tipo": "Tipo",
+            "capienza": "Capienza del serbatoio",
+            "batteria_kwh": "Batteria",
+            "consumo": "Consumo (L/100 km o kWh/100 km)",
+            "entita_livello": "Entità del livello (% o litri)",
+            "entita_autonomia": "Entità dell'autonomia",
+            "entita_km": "Entità dei km"
+          }
+        }
+      },
+      "abort": {
+        "reconfigure_successful": "Auto aggiornata."
+      }
+    }
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Pienone",
+        "description": "Fuel prices and chargers near an area in Italy (official MIMIT and PUN open data). Defaults to your home location and all fuels; the main sensors follow the active car of the app, if you sync it.",
+        "data": {
+          "self_service": "Self service",
+          "raggio_km": "Radius",
+          "latitudine": "Latitude",
+          "longitudine": "Longitude",
+          "carburanti": "Fuels"
+        }
+      }
+    },
+    "error": {
+      "fuori_italia": "The area must be in Italy: prices are Italian only.",
+      "nessun_carburante": "Pick at least one fuel."
+    },
+    "abort": {
+      "already_configured": "This area is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Pienone options",
+        "description": "Favourites: MIMIT station numbers, comma separated (e.g. the id_mimit attribute of the «Cheapest» sensor). Threshold: how many cents a price must drop to fire pienone_prezzo_sceso.",
+        "data": {
+          "preferiti": "Other favourites (MIMIT ids)",
+          "soglia_cent": "Drop threshold",
+          "raggio_km": "Radius",
+          "carburanti": "Fuels",
+          "self_service": "Self service",
+          "mostra": "App data to show",
+          "preferiti_scelti": "Favourite stations (from nearby)"
+        }
+      }
+    },
+    "error": {
+      "nessun_carburante": "Pick at least one fuel."
+    }
+  },
+  "selector": {
+    "carburante": {
+      "options": {
+        "benzina": "Petrol",
+        "gasolio": "Diesel",
+        "gpl": "LPG",
+        "metano": "CNG",
+        "elettrico": "Electric (chargers)"
+      }
+    },
+    "tipo_auto": {
+      "options": {
+        "benzina": "Petrol",
+        "gasolio": "Diesel",
+        "gpl": "LPG",
+        "metano": "CNG",
+        "elettrica": "Electric",
+        "ibrida_plugin": "Plug-in hybrid"
+      }
+    },
+    "sezione": {
+      "options": {
+        "viaggio": "Trip in progress",
+        "carplay": "CarPlay",
+        "statistiche": "Diary statistics",
+        "obd": "OBD adapter",
+        "notifiche": "App notifications",
+        "attivita": "Live Activity",
+        "preferenze": "Preferences",
+        "posizione": "Phone area",
+        "extra": "Other app data"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "piu_conveniente": {
+        "name": "Cheapest"
+      },
+      "mediana_zona": {
+        "name": "Typical area price"
+      },
+      "tendenza_7_giorni": {
+        "name": "7-day trend"
+      },
+      "consiglio": {
+        "name": "Advice"
+      },
+      "preferito": {
+        "name": "Favourite {id}"
+      },
+      "sincronizzazione": {
+        "name": "App sync"
+      },
+      "auto_attiva": {
+        "name": "Active car"
+      },
+      "ultimo_pieno": {
+        "name": "Last refuel"
+      },
+      "colonnine_libere": {
+        "name": "Free chargers nearby"
+      },
+      "ricarica_piu_conveniente": {
+        "name": "Cheapest charging"
+      },
+      "prossimo_viaggio": {
+        "name": "Next trip"
+      },
+      "quadro": {
+        "name": "Overview"
+      },
+      "auto_livello": {
+        "name": "Level"
+      },
+      "auto_autonomia": {
+        "name": "Range"
+      },
+      "auto_km": {
+        "name": "Odometer"
+      },
+      "auto_carburante": {
+        "name": "Fuel"
+      },
+      "auto_piu_conveniente": {
+        "name": "Cheapest"
+      },
+      "auto_ricarica": {
+        "name": "Cheapest charging"
+      },
+      "auto_mediana_zona": {
+        "name": "Typical area price"
+      },
+      "auto_tendenza_7_giorni": {
+        "name": "7-day trend"
+      },
+      "auto_consiglio": {
+        "name": "Advice"
+      },
+      "auto_ultimo_pieno": {
+        "name": "Last refuel"
+      },
+      "dati_app": {
+        "name": "App data"
+      },
+      "in_viaggio": {
+        "name": "Trip"
+      },
+      "carplay": {
+        "name": "CarPlay"
+      },
+      "live_activity": {
+        "name": "Live Activity"
+      },
+      "notifiche_app": {
+        "name": "App notifications"
+      },
+      "auto_consumo_medio": {
+        "name": "Average consumption"
+      },
+      "auto_spesa_mese": {
+        "name": "Spent this month"
+      },
+      "auto_km_mese": {
+        "name": "Km this month"
+      },
+      "auto_litri_mese": {
+        "name": "Litres this month"
+      },
+      "auto_prezzo_medio": {
+        "name": "Average price this month"
+      },
+      "auto_obd": {
+        "name": "OBD adapter"
+      }
+    }
+  },
+  "services": {
+    "aggiorna": {
+      "name": "Refresh prices",
+      "description": "Reads prices and trend now."
+    },
+    "registra_pieno": {
+      "name": "Log a refuel",
+      "description": "Adds a refuel to the Pienone app diary (to confirm in the app). A refuel of the same car within 2 hours is not added twice.",
+      "fields": {
+        "litri": {
+          "name": "Litres",
+          "description": "Litres refuelled."
+        },
+        "euro": {
+          "name": "Amount",
+          "description": "Total paid, in euro."
+        },
+        "prezzo": {
+          "name": "Price",
+          "description": "Price per litre: used for the amount if missing."
+        },
+        "km": {
+          "name": "Odometer",
+          "description": "Odometer reading in km."
+        },
+        "distributore": {
+          "name": "Station",
+          "description": "Name or address of the station."
+        },
+        "impianto": {
+          "name": "MIMIT station id",
+          "description": "The id_mimit attribute of the Pienone sensors."
+        },
+        "auto": {
+          "name": "Car",
+          "description": "Car name as in the app; default the active car."
+        },
+        "quando": {
+          "name": "When",
+          "description": "Default now."
+        },
+        "pieno_completo": {
+          "name": "Full tank",
+          "description": "Filled up to the top."
+        }
+      }
+    }
+  },
+  "config_subentries": {
+    "auto": {
+      "initiate_flow": {
+        "user": "Add car"
+      },
+      "entry_type": "Car",
+      "step": {
+        "user": {
+          "title": "A car in Home Assistant",
+          "description": "Without the Pienone app: name, type and, if you have them, your car's entities (e.g. from the car maker integration). With the app synced, a car with the same name merges with the app's.",
+          "data": {
+            "nome": "Name",
+            "tipo": "Type",
+            "capienza": "Tank size",
+            "batteria_kwh": "Battery",
+            "consumo": "Consumption (L/100 km or kWh/100 km)",
+            "entita_livello": "Level entity (% or litres)",
+            "entita_autonomia": "Range entity",
+            "entita_km": "Odometer entity"
+          }
+        },
+        "reconfigure": {
+          "title": "A car in Home Assistant",
+          "description": "Without the Pienone app: name, type and, if you have them, your car's entities (e.g. from the car maker integration). With the app synced, a car with the same name merges with the app's.",
+          "data": {
+            "nome": "Name",
+            "tipo": "Type",
+            "capienza": "Tank size",
+            "batteria_kwh": "Battery",
+            "consumo": "Consumption (L/100 km or kWh/100 km)",
+            "entita_livello": "Level entity (% or litres)",
+            "entita_autonomia": "Range entity",
+            "entita_km": "Odometer entity"
+          }
+        }
+      },
+      "abort": {
+        "reconfigure_successful": "Car updated."
+      }
+    }
+  }
+}

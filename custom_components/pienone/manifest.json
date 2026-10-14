@@ -1,0 +1,17 @@
+{
+  "domain": "pienone",
+  "name": "Pienone",
+  "codeowners": [
+    "@matteoopc"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "http"
+  ],
+  "documentation": "https://github.com/matteoopc/pienone-homeassistant",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/matteoopc/pienone-homeassistant/issues",
+  "requirements": [],
+  "version": "0.2.2"
+}

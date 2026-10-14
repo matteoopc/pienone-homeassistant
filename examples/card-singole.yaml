@@ -1,0 +1,72 @@
+# Card da copiare una per una (Modifica plancia › Aggiungi card › Manuale). Solo card native.
+# «panda» è il nome dell'auto nell'app: sostituiscilo col tuo.
+
+# 1) Scheda auto: livello, autonomia, consiglio e «Portami lì»
+type: vertical-stack
+cards:
+  - type: gauge
+    entity: sensor.pienone_panda_livello
+    name: Panda
+    severity: {green: 40, yellow: 20, red: 0}
+  - type: glance
+    entities:
+      - entity: sensor.pienone_panda_autonomia
+        name: Autonomia
+      - entity: sensor.pienone_panda_piu_conveniente
+        name: Più conveniente
+  - type: markdown
+    content: >-
+      {{ states('sensor.pienone_panda_consiglio') }}
+      {% set u = state_attr('sensor.pienone_panda_piu_conveniente', 'portami_li') %}
+      {% if u %}[Portami lì]({{ u }}){% endif %}
+---
+# 2) Riquadro della zona: prezzo tipico e tendenza
+type: glance
+title: Zona
+entities:
+  - entity: sensor.pienone_prezzo_tipico_della_zona
+    name: Tipico
+  - entity: sensor.pienone_tendenza_7_giorni
+    name: 7 giorni
+  - entity: sensor.pienone_piu_conveniente
+    name: Più conveniente
+---
+# 3) Ultimo pieno
+type: entities
+title: Ultimo pieno
+entities:
+  - sensor.pienone_ultimo_pieno
+  - type: attribute
+    entity: sensor.pienone_ultimo_pieno
+    attribute: auto
+    name: Auto
+  - type: attribute
+    entity: sensor.pienone_ultimo_pieno
+    attribute: litri
+    name: Litri
+    suffix: L
+  - type: attribute
+    entity: sensor.pienone_ultimo_pieno
+    attribute: euro
+    name: Speso
+    suffix: €
+---
+# 4) Il distributore più conveniente sulla mappa (il sensore ha latitude e longitude)
+type: map
+title: Più conveniente
+default_zoom: 13
+entities:
+  - entity: sensor.pienone_piu_conveniente
+  - entity: zone.home
+---
+# 5) Una entities semplice con tutto Pienone
+type: entities
+title: Pienone
+entities:
+  - sensor.pienone_quadro
+  - sensor.pienone_consiglio
+  - sensor.pienone_piu_conveniente
+  - sensor.pienone_prezzo_tipico_della_zona
+  - sensor.pienone_tendenza_7_giorni
+  - sensor.pienone_prossimo_viaggio
+  - sensor.pienone_auto_attiva

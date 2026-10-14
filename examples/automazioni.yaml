@@ -1,0 +1,52 @@
+# Automazioni d'esempio (Impostazioni › Automazioni › Crea › ⋮ › Modifica in YAML). Sostituisci
+# notify.mobile_app_il_tuo_telefono col servizio di notifica del tuo telefono e «panda» col nome della tua auto.
+
+# 1) «Fai il pieno»: quando il consiglio della Panda dice di rifornire presto
+alias: "Pienone: fai il pieno (Panda)"
+triggers:
+  - trigger: state
+    entity_id: sensor.pienone_panda_consiglio
+    attribute: da_rifornire_presto
+    to: true
+conditions: []
+actions:
+  - action: notify.mobile_app_il_tuo_telefono
+    data:
+      title: Panda
+      message: "{{ states('sensor.pienone_panda_consiglio') }}"
+      data:
+        url: "{{ state_attr('sensor.pienone_panda_piu_conveniente', 'apri_in_pienone') }}"
+mode: single
+---
+# 2) Sotto il 20%, una volta per discesa
+alias: "Pienone: Panda sotto il 20%"
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.pienone_panda_livello
+    below: 20
+actions:
+  - action: notify.mobile_app_il_tuo_telefono
+    data:
+      title: Panda in riserva
+      message: >-
+        {{ states('sensor.pienone_panda_livello') }}%, {{ states('sensor.pienone_panda_autonomia') }} km.
+        Il più conveniente: {{ state_attr('sensor.pienone_panda_piu_conveniente', 'distributore') }}
+        a {{ states('sensor.pienone_panda_piu_conveniente') }} €/L.
+mode: single
+---
+# 3) La sera prima di un viaggio: ce la fai o serve il pieno?
+alias: "Pienone: promemoria prima del viaggio"
+triggers:
+  - trigger: time
+    at: "19:00:00"
+conditions:
+  - condition: template
+    value_template: >-
+      {% set v = states('sensor.pienone_prossimo_viaggio') %}
+      {{ v not in ['unknown', 'unavailable'] and (as_datetime(v) - now()).total_seconds() < 36 * 3600 }}
+actions:
+  - action: notify.mobile_app_il_tuo_telefono
+    data:
+      title: "Domani: {{ state_attr('sensor.pienone_prossimo_viaggio', 'luogo') }}"
+      message: "{{ states('sensor.pienone_panda_consiglio') }}"
+mode: single

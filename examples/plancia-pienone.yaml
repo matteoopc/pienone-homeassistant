@@ -1,0 +1,81 @@
+# Plancia «Pienone» (vista a sezioni, solo card native di Home Assistant).
+# Impostazioni › Plance › Aggiungi plancia › «Nuova plancia da zero» › ⋮ › Modifica › ⋮ › Editor di configurazione grezza,
+# poi incolla questa vista dentro «views:».
+# Gli id delle entità sono quelli di un Home Assistant in italiano, con un'auto chiamata «Panda» nell'app:
+# per le tue auto sostituisci «panda» col nome della tua (es. sensor.pienone_NOMEAUTO_livello).
+title: Pienone
+path: pienone
+icon: mdi:gas-station
+type: sections
+max_columns: 3
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading: Quadro
+        icon: mdi:view-dashboard-outline
+      - type: tile
+        entity: sensor.pienone_quadro
+        grid_options: {columns: full}
+      - type: tile
+        entity: sensor.pienone_prezzo_tipico_della_zona
+        name: Prezzo tipico qui
+      - type: tile
+        entity: sensor.pienone_tendenza_7_giorni
+        name: Tendenza 7 giorni
+      - type: tile
+        entity: sensor.pienone_prossimo_viaggio
+        grid_options: {columns: full}
+      - type: markdown
+        content: >-
+          {% set v = state_attr('sensor.pienone_prossimo_viaggio', 'luogo') %}
+          {% if v %}**Prossimo viaggio:** {{ v }} · {{ state_attr('sensor.pienone_prossimo_viaggio', 'km') }} km
+          {% else %}Nessun viaggio nei prossimi 7 giorni.{% endif %}
+  - type: grid
+    cards:
+      - type: heading
+        heading: Panda
+        icon: mdi:car
+      - type: gauge
+        entity: sensor.pienone_panda_livello
+        name: Livello
+        min: 0
+        max: 100
+        severity: {green: 40, yellow: 20, red: 0}
+      - type: tile
+        entity: sensor.pienone_panda_autonomia
+        name: Autonomia
+      - type: markdown
+        content: "{{ states('sensor.pienone_panda_consiglio') }}"
+      - type: tile
+        entity: sensor.pienone_panda_piu_conveniente
+        name: Più conveniente
+      - type: markdown
+        content: >-
+          {% set s = 'sensor.pienone_panda_piu_conveniente' %}
+          {{ state_attr(s, 'distributore') or state_attr(s, 'colonnina') or '' }}
+          {% if state_attr(s, 'portami_li') %}· [Portami lì]({{ state_attr(s, 'portami_li') }}){% endif %}
+  - type: grid
+    cards:
+      - type: heading
+        heading: Pieni
+        icon: mdi:gas-station-outline
+      - type: tile
+        entity: sensor.pienone_ultimo_pieno
+        grid_options: {columns: full}
+      - type: entities
+        entities:
+          - entity: sensor.pienone_ultimo_pieno
+            type: attribute
+            attribute: litri
+            name: Litri
+            suffix: L
+          - entity: sensor.pienone_ultimo_pieno
+            type: attribute
+            attribute: euro
+            name: Speso
+            suffix: €
+          - entity: sensor.pienone_ultimo_pieno
+            type: attribute
+            attribute: distributore
+            name: Dove
